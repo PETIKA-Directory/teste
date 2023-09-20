@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio</title>
+    <style>
+        /* Estilos para o corpo do site */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilos para o cabeçalho (árvore) */
+        header {
+            background-color: #6d4228;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Estilos para as seções */
+        section {
+            padding: 40px;
+        }
+
+        /* Estilos para os títulos das seções */
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Estilos para a galeria de portfólio */
+        .portfolio-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Define 3 colunas igualmente espaçadas */
+            gap: 2px; /* Espaço entre as imagens */
+        }
+
+        .portfolio-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            position: relative; /* Permite posicionar o contêiner de sobreposição */
+        }
+
+        .portfolio-item img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Estilos para as imagens na seção "Sobre" */
+        .sobre-images {
+            display: flex;
+            justify-content: center;
+        }
+
+        .sobre-images .portfolio-item {
+            flex: 0 0 calc(50% - 10px); /* Divide a largura em 50% com espaço mínimo de 10px entre as imagens */
+            margin: 0 5px; /* Adicione um pequeno espaço horizontal entre as imagens */
+            position: relative; /* Permite posicionar o contêiner de sobreposição */
+        }
+
+        .sobre-images .portfolio-item img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .image-overlay {
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro transparente para a sobreposição */
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px; /* Bordas redondas para o contêiner de sobreposição */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0; /* Oculta inicialmente a sobreposição */
+            transition: opacity 0.3s ease-in-out; /* Adiciona uma transição suave para a opacidade */
+        }
+
+        .portfolio-item:hover .image-overlay {
+            opacity: 1; /* Torna a sobreposição visível quando o item é hover */
+        }
+
+        .image-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease; /* Adiciona uma transição suave ao efeito */
+        }
+
+        /* Estilos para o efeito no hover */
+        .image-container:hover {
+            transform: scale(1.1); /* Aumenta a imagem em 10% no hover */
+        }
+
+        /* Estilos para a descrição no hover */
+        .image-container:hover .image-overlay {
+            opacity: 1; /* Torna a sobreposição visível no hover */
+        }
+        .logo-container {
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.7); /* Adicione uma sombra branca para criar o contorno */
+            border-radius: 50%; /* Faça o contorno circular */
+            padding: 10px; /* Adicione algum espaço interno para o contorno */
+        }
+
+        /* Estilos para o logotipo no canto direito superior */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 40px;
+            color: #fff; /* Adicione a cor branca ao logotipo */
+        }
+        /* Estilos para o botão no canto superior direito */
+        .menu-button {
+            position: fixed;
+            top: 20px; /* Ajuste a posição vertical conforme necessário */
+            right: 20px; /* Ajuste a posição horizontal conforme necessário */
+            background-color: #556B2F;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Estilos para o menu drop-down */
+        .dropdown-menu {
+            position: absolute;
+            top: 40px; /* Ajuste a posição vertical conforme necessário */
+            right: 20px; /* Ajuste a posição horizontal conforme necessário */
+            background-color: #F0FFFF;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none;
+            z-index: 1;
+        }
+
+        /* Estilos para os itens do menu */
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* Estilos para os itens do menu no hover */
+        .dropdown-menu a:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Mostra o menu quando o botão é hover */
+        .menu-button:hover .dropdown-menu {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div style="background-color: #F0FFFF; "></div>
+    <header>
+        <!-- Logotipo no canto direito superior com contorno -->
+        <div class="logo-container">
+            <div class="logo">CRISARTES</div>
+        </div>
+        <div class="menu-button">
+        Menu
+        <div class="dropdown-menu">
+            <a href="#catalogo">Catálogo</a>
+            <a href="#jogos-de-tapete">Jogos de Tapete</a>
+            <a href="#artesanatos">Artesanatos</a>
+            <a href="#nossa-loja">Nossa Loja</a>
+            <a href="#contato">Entre em Contato</a>
+        </div>
+    </div>
+        <!-- Estrutura da árvore -->
+        <nav>
+            <ul>
+                <class style= "border: solid 01px; border-radius: 40px; padding: 20px; background-color: #556B2F; ">
+                <li><a href="#introducao">Introdução</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                </class>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Seção de Introdução -->
+    <section id="introducao">
+        <h1>Introdução</h1>
+        <!-- Conteúdo da introdução aqui -->
+    </section>
+
+    <div class="portfolio-gallery">
+        <div class="portfolio-item">
+            <img src="https://artesanato.culturamix.com/blog/wp-content/gallery/tapetes-com-retalhos4/tapete-feito-de-retalho-1.jpg" alt="Tapete de Flores / Retalho artesanal">
+            <div class="image-overlay">
+                <p>Tapete de Flores / Retalho artesanal</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item">
+            <img src="https://artesanato.culturamix.com/blog/wp-content/gallery/tapetes-com-retalhos4/tapete-feito-de-retalho-1.jpg" alt="Descrição da imagem 2">
+            <div class="image-overlay">
+                <p>Descrição da imagem 2</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item">
+            <img src="https://artesanato.culturamix.com/blog/wp-content/gallery/tapetes-com-retalhos4/tapete-feito-de-retalho-1.jpg" alt="Descrição da imagem 3">
+            <div class="image-overlay">
+                <p>Descrição da imagem 3</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="sobre">
+        <h1> Sobre</h1>
+        <p>
+            Os tapetes de retalho são uma opção de decoração única e versátil que tem conquistado o coração de muitas pessoas. Eles são feitos a partir da reutilização de pedaços de tecido, como retalhos de roupas ou tecidos excedentes, que são cuidadosamente costurados juntos para criar uma superfície macia e colorida. Esses tapetes têm diversas características que os tornam uma excelente escolha para compra em sua loja de tapetes de retalho:
+        </p>
+        <p>
+            1. **Sustentabilidade**: Os tapetes de retalho são uma opção ecologicamente correta, pois contribuem para a redução do desperdício têxtil. Ao reutilizar pedaços de tecido que de outra forma seriam descartados, você está contribuindo para um estilo de vida mais sustentável.
+        </p>
+        <p>
+            2. **Variedade de Cores e Padrões**: Uma das maiores vantagens dos tapetes de retalho é a infinidade de cores e padrões disponíveis. Cada tapete é único, já que é feito a partir de uma combinação de retalhos diversos. Isso permite que os clientes escolham tapetes que se encaixem perfeitamente em sua decoração.
+        </p>
+        <p>
+            3. **Textura Aconchegante**: A mistura de diferentes tipos de tecido cria uma textura macia e agradável ao toque. Os tapetes de retalho proporcionam uma sensação de conforto e aconchego aos ambientes em que são colocados, tornando-os ideais para salas de estar, quartos e áreas de descanso.
+        </p>
+        <p>
+            4. **Customização**: Como cada tapete é único, os clientes têm a oportunidade de personalizar sua escolha. Eles podem selecionar tapetes que se adequem ao tamanho, cores e estilo desejados, tornando-os uma opção altamente personalizável para a decoração de interiores.
+        </p>
+        <p>
+            5. **Preço Acessível**: Os tapetes de retalho são geralmente mais acessíveis em comparação com tapetes tradicionais. Isso os torna uma opção viável para aqueles que desejam adicionar um toque de cor e estilo aos seus espaços sem gastar muito.
+        </p>
+        <p>
+            6. **Arte Feita à Mão**: Muitos tapetes de retalho são feitos à mão, o que acrescenta um valor artesanal e autenticidade. Os clientes apreciam produtos feitos com cuidado e atenção aos detalhes, o que torna esses tapetes ainda mais especiais.
+        </p>
+        <div class="sobre-images">
+            <div class="portfolio-item">
+                <img src="https://artesanato.culturamix.com/blog/wp-content/gallery/tapetes-com-retalhos4/tapete-feito-de-retalho-1.jpg" alt="Descrição da imagem 4">
+                <div class="image-overlay">
+                    <p>Descrição da imagem 4</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://artesanato.culturamix.com/blog/wp-content/gallery/tapetes-com-retalhos4/tapete-feito-de-retalho-1.jpg" alt="Descrição da imagem 5">
+                <div class="image-overlay">
+                    <p>Descrição da imagem 5</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h1>Portfolio</h1>
+        <div class="portfolio-gallery">
+            <div class="portfolio-item">
+                <img src="https://artesanato.culturamix.com/blog/wp-content/gallery/tapetes-com-retalhos4/tapete-feito-de-retalho-1.jpg" alt="Descrição da imagem 6">
+                <div class="image-overlay">
+                    <p>Descrição da imagem 6</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://artesanato.culturamix.com/blog/wp-content/gallery/tapetes-com-retalhos4/tapete-feito-de-retalho-1.jpg" alt="Descrição da imagem 7">
+                <div class="image-overlay">
+                    <p>Descrição da imagem 7</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://artesanato.culturamix.com/blog/wp-content/gallery/tapetes-com-retalhos4/tapete-feito-de-retalho-1.jpg" alt="Descrição da imagem 8">
+                <div class="image-overlay">
+                    <p>Descrição da imagem 8</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botão do WhatsApp -->
+    <a href="https://api.whatsapp.com/send?phone=5511969360283 " target="_blank" style="display: block; width: 200px; height: 60px; background-color: #25d366; color: #fff; text-align: center; font-size: 18px; line-height: 60px; text-decoration: none; border-radius: 10px; margin: 20px auto;">
+    É Rápido e facil,Peça já o seu, por aqui!
+    </a>
+
+    </section>
+
+    <footer style="background-color: #333; color: #fff; padding: 20px; text-align: center;">
+    <div>
+        <h2>Localização</h2>
+        <p>123 Rua Exemplo, Cidade, Estado</p>
+    </div>
+    <div>
+        <h2>Entre em Contato</h2>
+        <p>Email: exemplo@email.com</p>
+        <p>Telefone: (123) 456-7890</p>
+    </div>
+    <div>
+        <h2>Redes Sociais</h2>
+        <!-- Adicione ícones ou links para suas redes sociais aqui -->
+    </div>
+    </footer>
+
+
+
+
+
+
+
+
+</body>
+</html>
